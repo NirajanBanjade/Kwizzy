@@ -1,6 +1,7 @@
 // login.js
 import express from 'express';
 import pool from '../../database/db.js';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -47,8 +48,11 @@ router.post('/login', async (req, res) => {
         if(password!==result.rows[0].password_hash){
             return res.status(401).json({ message: 'Invalid password' });
         }
+        const user = result.rows[0];
 
-        res.status(201).json({message: "Login Successful!"})
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ message: 'Login successful', token });
+        
     }
     catch (err) {
         console.error('Login error:', err.message);
