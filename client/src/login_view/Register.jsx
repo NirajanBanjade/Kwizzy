@@ -44,6 +44,7 @@ const Register = ({onLoginSuccess}) => {
         if (response.ok) {
           alert("Logged in!");
           // Call the parent callback to update login state
+          localStorage.setItem('token', data.token);
           if (typeof onLoginSuccess === 'function') {
             onLoginSuccess(identifier); // or onLoginSuccess(user) if you want to use username
           }
