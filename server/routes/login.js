@@ -2,10 +2,11 @@
 import express from 'express';
 import pool from '../../database/db.js';
 import jwt from 'jsonwebtoken';
-
+import bcrypt from 'bcryptjs';
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
+    
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
@@ -19,9 +20,11 @@ router.post('/register', async (req, res) => {
             return res.status(409).json({ message: 'User already exists! Login!' });
         }
 
-        const added_user = await pool.query(
-            'INSERT INTO users (name, email, password_hash) VALUES ($1, $2, $3) RETURNING *',
-            [name, email, password] // password should be hashed in production
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await pool.query(
+          'INSERT INTO users (name, email, password_hash) VALUES ($1, $2, $3)',
+          [name, email, hashedPassword] //hashed password in production.
         );
 
         res.status(201).json({ message: 'User created successfully.' });

@@ -6,6 +6,10 @@ dotenv.config({ path: '../.env' });
 const PORT = process.env.PORT;
 import pool from '../database/db.js';
 import authRoutes from './routes/login.js';
+import quizRoutes from './routes/quiz.js';
+import userRoutes from './routes/user.js';
+import cors from 'cors';
+app.use(cors());
 
 app.use(express.json());
 
@@ -18,7 +22,10 @@ pool.query('SELECT NOW()')
     process.exit(1); // Exit if DB fails
   });
 
-app.use('/', authRoutes);
+app.use('/api/auth', authRoutes);//All routes inside authRoutes will be prefixed with /api/auth
+app.use('/api/user', quizRoutes);//All routes inside quizRoutes will be prefixed with /api/user
+app.use('/api/user', userRoutes);//All routes inside userRoutes will be prefixed with /api/user
+  
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
