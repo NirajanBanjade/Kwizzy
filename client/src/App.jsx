@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
+import Register from './login_view/Register';
+import Home_page from './home_page/Home_page';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+  
+
+  useEffect(() => {
+    // Check login status on mount
+    const username = localStorage.getItem('username');
+    setIsLoggedIn(!!username);
+  }, []);
+
+  const handleLoginSuccess = (username) => {
+    localStorage.setItem('username', username);
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('username');
+    setIsLoggedIn(false);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {isLoggedIn ? (
+        <Home_page onLogout={handleLogout} />
+      ) : (
+        <Register onLoginSuccess={handleLoginSuccess} />
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
