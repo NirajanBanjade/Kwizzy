@@ -9,8 +9,11 @@ const Home_page = () => {
   return (
     <>
     <div className="layout">
-      <Sidebar />
+    <Sidebar />
+      <div className="main-content">
+        <h1>Welcome to Quizzy.</h1>
 
+      </div>
     </div>
     </>
   );

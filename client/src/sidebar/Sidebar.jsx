@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { FaUser, FaChartBar, FaHistory, FaPlay, FaBars, FaSignOutAlt } from 'react-icons/fa';
 import './Sidebar.css';
 
-const Sidebar = ({ onLogout }) => {
+const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState('User'); // Default fallback name
 
   const toggleSidebar = () => setIsOpen(!isOpen);
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    window.location.reload(); // or redirect to login page
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -64,7 +69,7 @@ const Sidebar = ({ onLogout }) => {
           </ul>
         </div>
 
-        <button className="logout-btn" onClick={onLogout}>
+        <button className="logout-btn" onClick={handleLogout}>
           <FaSignOutAlt /><span>Logout</span>
         </button>
       </div>
