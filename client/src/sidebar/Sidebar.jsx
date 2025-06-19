@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FaUser, FaChartBar, FaHistory, FaPlay, FaBars, FaSignOutAlt } from 'react-icons/fa';
+import { FaUser, FaChartBar, FaHistory, FaPlay, FaBars, FaSignOutAlt, FaHome } from 'react-icons/fa';
 import './Sidebar.css';
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ const Sidebar = () => {
       }
 
       try {
-        const res = await fetch('http://localhost:5001/api/user/profile', {
+        const res = await fetch(`${baseURL}/user/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -54,7 +55,7 @@ const Sidebar = () => {
 
       <div className={`sidebar-container ${isOpen ? 'open' : 'closed'}`}>
         <div className="sidebar-header">
-          <h2 className="sidebar-logo">Quizzy</h2>
+          <h2 className="sidebar-logo">kwizzy</h2>
           <button className="sidebar-close-btn" onClick={toggleSidebar}>
             <FaBars />
           </button>
@@ -62,10 +63,12 @@ const Sidebar = () => {
 
         <div className="sidebar-content">
           <ul>
-            <li><FaUser /><span>{user}</span></li>
+            <li><FaHome /><span>Home</span></li>
+            <li><FaUser /><span>{user}'s Profile</span></li>
             <li><FaPlay /><span>Start Quiz</span></li>
             <li><FaChartBar /><span>Analytics</span></li>
             <li><FaHistory /><span>History</span></li>
+
           </ul>
         </div>
 

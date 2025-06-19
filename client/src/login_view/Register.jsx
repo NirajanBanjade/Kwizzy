@@ -26,7 +26,7 @@ const Register = ({onLoginSuccess}) => {
         name: user,//backend is expecting name not user.
         email:email, password:password
       } : {identifier,password}
-      const url = `${API_BASE}${endpoint}`;
+      const url = `${API_BASE}/auth${endpoint}`;
       console.log("Request to:", url);
 
       const response = await fetch(url, {
