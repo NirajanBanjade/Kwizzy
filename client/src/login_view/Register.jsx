@@ -26,7 +26,7 @@ const Register = ({onLoginSuccess}) => {
         name: user,//backend is expecting name not user.
         email:email, password:password
       } : {identifier,password}
-      const url = `${API_BASE}${endpoint}`;
+      const url = `${API_BASE}/auth${endpoint}`;
       console.log("Request to:", url);
 
       const response = await fetch(url, {
@@ -44,6 +44,7 @@ const Register = ({onLoginSuccess}) => {
         if (response.ok) {
           alert("Logged in!");
           // Call the parent callback to update login state
+          localStorage.setItem('token', data.token);
           if (typeof onLoginSuccess === 'function') {
             onLoginSuccess(identifier); // or onLoginSuccess(user) if you want to use username
           }
