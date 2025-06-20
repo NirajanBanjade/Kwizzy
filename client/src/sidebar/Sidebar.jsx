@@ -4,7 +4,7 @@ import './Sidebar.css';
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [user, setUser] = useState('User'); // Default fallback name
 
   const toggleSidebar = () => setIsOpen(!isOpen);

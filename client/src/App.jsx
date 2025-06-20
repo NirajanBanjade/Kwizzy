@@ -7,9 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    localStorage.clear();
-  }, []);
+  // useEffect(() => {
+  //   localStorage.clear();
+  // }, []);
   
 
   useEffect(() => {
