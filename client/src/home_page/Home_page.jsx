@@ -75,7 +75,6 @@ const Home_page = () => {
             </div>
 
             <div className="box box3">
-              <h3>🎯 Recent Quizzes</h3>
               <div className="recent-quizzes">
                 {<RecentQuizzes/>}
               </div>
