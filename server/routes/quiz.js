@@ -1,4 +1,3 @@
-
 import express from 'express';
 const router = express.Router();
 import pool from '../../database/db.js';
@@ -9,12 +8,14 @@ router.get('/quizzes', authenticateToken, async (req, res) => {
     // it will attach req.user with the user id.
     try{
         const quizzes = await pool.query('SELECT * FROM quizzes WHERE user_id = $1 ORDER BY id DESC', [req.user.id]); 
-        res.json(quizzes.rows);
+        
+        console.log("Quizzes fetched are: ",quizzes.rows);
+        
         if (quizzes.rows.length === 0) {
             return res.status(404).json({ message: "No quizzes found." });
         }
           
-        console.log("Quizzes fetched are: ",quizzes.rows);
+        res.json(quizzes.rows);
 
     }
     catch(error){

@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { FaUser, FaChartBar, FaHistory, FaPlay, FaBars, FaSignOutAlt, FaHome } from 'react-icons/fa';
 import './Sidebar.css';
 const baseURL = import.meta.env.VITE_API_BASE_URL;
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [user, setUser] = useState('User'); // Default fallback name
-
+  const navigate = useNavigate();
   const toggleSidebar = () => setIsOpen(!isOpen);
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -44,6 +45,9 @@ const Sidebar = () => {
 
     fetchUser();
   }, []);
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
 
   return (
     <>
@@ -63,11 +67,12 @@ const Sidebar = () => {
 
         <div className="sidebar-content">
           <ul>
-            <li><FaHome /><span>Home</span></li>
-            <li><FaUser /><span>{user}'s Profile</span></li>
-            <li><FaPlay /><span>Start Quiz</span></li>
-            <li><FaChartBar /><span>Analytics</span></li>
-            <li><FaHistory /><span>History</span></li>
+          <li onClick={() => handleNavigation('/home')}><FaHome /><span>Home</span></li>
+          <li onClick={() => handleNavigation('/userprofile')}><FaUser /><span>{user}'s Profile</span></li>
+          <li onClick={() => handleNavigation('/quiz')}><FaPlay /><span>Start Quiz</span></li>
+          <li onClick={() => handleNavigation('/analytics')}><FaChartBar /><span>Analytics</span></li>
+          <li onClick={() => handleNavigation('/history')}><FaHistory /><span>History</span></li>
+
 
           </ul>
         </div>
