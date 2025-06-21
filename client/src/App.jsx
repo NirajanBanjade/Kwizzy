@@ -4,10 +4,10 @@ import './App.css';
 import Register from './login_view/Register';
 import Home_page from './home_page/home_page';
 import Quiz from './pages/Quiz';
-import SidebarLayout from "./sidebar/Sidebarlayout";
-import UserProfile from './profile/Profile';  // create if missing
-import Analytics from './analytics/Analytics';      // create if missing
-import History from './History/history';          // create if missing
+import Sidebar from './sidebar/Sidebar';
+import UserProfile from './profile/Profile';
+import Analytics from './analytics/Analytics';
+import History from './History/history';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -35,18 +35,20 @@ function App() {
 
   return (
     <BrowserRouter>
-<Routes>
-  <Route path="/" element={<SidebarLayout />}>
-    <Route index element={<Navigate to="/home" />} />
-    <Route path="home" element={<Home_page />} />
-    <Route path="quiz" element={<Quiz />} />
-    <Route path="userprofile" element={<UserProfile />} />
-    <Route path="analytics" element={<Analytics />} />
-    <Route path="history" element={<History />} />
-    <Route path="*" element={<Navigate to="/home" />} />
-  </Route>
-</Routes>
-
+      <div className="layout"> {/* Shared layout */}
+        <Sidebar onLogout={handleLogout} /> {/* Always visible */}
+        <div className="main-content">
+          <Routes>
+            {/* <Route path="/" element={<Navigate to="/home" />} /> */}
+            <Route path="/" element={<Home_page />} />
+            <Route path="/quiz" element={<Quiz />} />
+            <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/history" element={<History />} />
+            <Route path="*" element={<Navigate to="/home" />} />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }
