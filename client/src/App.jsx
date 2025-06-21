@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Register from './login_view/Register';
 import Home_page from './home_page/Home_page';
+import Quiz from './pages/Quiz';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,14 +29,17 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  if (!isLoggedIn) {
+    return <Register onLoginSuccess={handleLoginSuccess} />;
+  }
+
   return (
-    <>
-      {isLoggedIn ? (
-        <Home_page onLogout={handleLogout} />
-      ) : (
-        <Register onLoginSuccess={handleLoginSuccess} />
-      )}
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home_page onLogout={handleLogout} />} />
+        <Route path="/quiz" element={<Quiz />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
