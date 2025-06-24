@@ -1,0 +1,153 @@
+.main-main-container {
+    min-height: 100vh;
+    background: #f7f8fa;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .layout {
+    display: flex;
+    flex: 1;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 30px 40px 0 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .homepage-grid {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+  }
+  
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    flex: 1;
+    min-width: 700px;
+  }
+  
+  .box {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 24px 20px;
+    margin-bottom: 0;
+  }
+  
+  .box3 {
+    flex: 1;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  @media (max-width: 900px) {
+    .homepage-grid {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .box3 {
+      min-width: 0;
+    }
+  }
+  
+  .stats .stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .highlight {
+    font-weight: bold;
+    color: #667eea;
+  }
+  
+  .performance-bar .bar-section {
+    margin-bottom: 15px;
+  }
+  
+  .bar-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .bar-track {
+    background: #e9ecef;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .bar-fill {
+    height: 100%;
+  }
+  
+  .bar-fill.green { background: #28a745; }
+  .bar-fill.yellow { background: #ffc107; }
+  .bar-fill.blue { background: #17a2b8; }
+  
+  .recent-quizzes .quiz-card {
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border-left: 4px solid;
+  }
+  
+  .quiz-card .quiz-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .quiz-card .quiz-info {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .quiz-card.purple { border-color: #667eea; }
+  .quiz-card.green { border-color: #28a745; }
+  .quiz-card.yellow { border-color: #ffc107; }
+  .quiz-card.red { border-color: #dc3545; }
+  
+  .footer {
+    margin-top: 40px;
+    padding: 25px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+  
+  .footer p {
+    margin: 6px 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    opacity: 0.95;
+  }
+  
+  .footer p:first-child {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .footer p:last-child {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 6px;
+  }
+  
+  .subtitle {
+    color: #666;
+    margin-bottom: 20px;
+  }
