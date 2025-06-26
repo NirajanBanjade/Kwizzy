@@ -9,7 +9,6 @@ const Home_page = () => {
     <>
     <div className="main-main-container">
       <div className="layout">
-        <Sidebar />
         <div className="main-content">
           <h1>Welcome to Quizzy 🎯</h1>
           <p className="subtitle">Your ultimate quiz platform for learning and fun!</p>
