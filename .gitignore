@@ -1,3 +1,5 @@
 .env
 .env.localbackup
 node_modules/
+
+server/.
