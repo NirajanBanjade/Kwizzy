@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Register from './login_view/Register';
-import Home_page from './home_page/home_page';
-import Quiz from './pages/Quiz';
+import Home_page from './home_page/Home_page';
+import Quiz from './quiz/Quiz'
 import Sidebar from './sidebar/Sidebar';
 import UserProfile from './profile/Profile';
 import Analytics from './analytics/Analytics';
