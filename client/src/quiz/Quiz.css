@@ -1,0 +1,85 @@
+/* Quiz.css */
+
+.quiz-container {
+    background: linear-gradient(to bottom right, #ede9fe, #dbeafe, #fce7f3);
+    min-height: 100vh;
+    min-width: 80vw;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .quiz-card {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 70rem;
+    transition: all 0.3s ease;
+  }
+  
+  .quiz-card:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+  }
+  
+  .quiz-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    text-align: center;
+    color: #4f46e5;
+    margin-bottom: 2.5rem;
+  }
+  
+  .label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.25rem;
+    display: block;
+  }
+  
+  .input,
+  .textarea,
+  .select,
+  .file {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.75rem;
+    margin-top: 0.25rem;
+    background-color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+  }
+  
+  .input:focus,
+  .textarea:focus,
+  .select:focus {
+    border-color: #6366f1;
+    outline: none;
+  }
+  
+  .textarea {
+    resize: none;
+  }
+  
+  .file {
+    background-color: #f9fafb;
+  }
+  
+  .submit-btn {
+    background-color: #4f46e5;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    width: 100%;
+    margin-top: 2rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #4338ca;
+  }
+  
