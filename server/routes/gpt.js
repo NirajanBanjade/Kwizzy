@@ -17,7 +17,7 @@ Difficulty: ${difficulty}
 Number of questions: ${questions}
 Context: ${context || 'N/A'}
 
-Generate multiple-choice questions in this format:
+Generate exactly ${questions} multiple-choice questions in this format:
 Q: ...
 A. ...
 B. ...
@@ -58,11 +58,37 @@ router.post('/generate', async (req, res) => {
   try {
     const { topic, context, difficulty, questions, provider } = req.body;
     const quiz = await generateQuiz({ topic, context, difficulty, questions, provider });
-    res.json({ quiz });
+    const quizJson = parseQuizTextToJson(quiz); // api returns the quiz in text format. so we need to parse it to json format.
+    res.json({ quizJson });
   } catch (err) {
     console.error('[Quiz Generation Error]', err.message);
     res.status(500).json({ error: 'Failed to generate quiz' });
   }
 });
+
+function parseQuizTextToJson(rawText) {
+    const questions = rawText.trim().split(/Q:\s+/).filter(Boolean);
+    const parsed = [];
+  
+    for (const block of questions) {
+      const lines = block.trim().split('\n').filter(Boolean);
+      const question = lines[0];
+      const options = {};
+      let answer = "";
+  
+      for (let line of lines.slice(1)) {
+        if (line.startsWith("A.")) options["A"] = line.slice(2).trim();
+        else if (line.startsWith("B.")) options["B"] = line.slice(2).trim();
+        else if (line.startsWith("C.")) options["C"] = line.slice(2).trim();
+        else if (line.startsWith("D.")) options["D"] = line.slice(2).trim();
+        else if (line.startsWith("Answer:")) answer = line.split("Answer:")[1].trim();
+      }
+  
+      parsed.push({ question, options, answer });
+    }
+  
+    return parsed;
+  }
+
 
 export default router;

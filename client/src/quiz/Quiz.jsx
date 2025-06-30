@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Quiz.css';
 
+import { useNavigate } from 'react-router-dom';
+
 const Quiz = () => {
   const [form, setForm] = useState({
     topic: '',
@@ -11,6 +13,9 @@ const Quiz = () => {
     keywords: '',
     file: null,
   });
+   
+  const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -37,6 +42,7 @@ const Quiz = () => {
       if(res.ok){
         const data = await res.json();
         console.log('🎯 Quiz generated successfully:', data);
+        navigate('/display_quiz', { state: { quizData: data.quiz } }); // ✅
       }
       else{
         console.error('❌ Error generating quiz:', res.statusText);
