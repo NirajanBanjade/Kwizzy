@@ -1,11 +1,12 @@
 import React from 'react';
 import Quizbox from '../quizbox/Quizbox';
 import { useLocation } from 'react-router-dom';
-const Display_quiz = ({ quizData }) => {
+const Display_quiz = () => {
     const { state } = useLocation();
     const quizData = state?.quizData || [];
     return (
-        <div>
+        <>
+        <div className='display-quiz-container'>
           <h1>🧠 Your Quiz</h1>
           {quizData.map((item, index) => (
             <Quizbox
@@ -16,6 +17,7 @@ const Display_quiz = ({ quizData }) => {
             />
           ))}
         </div>
+        </>
       );
       
 };

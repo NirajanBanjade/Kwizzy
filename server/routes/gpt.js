@@ -3,8 +3,8 @@ import express from 'express';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import OpenAI from 'openai';
 import dotenv from 'dotenv';
+dotenv.config({ path: '../.env' }); 
 
-dotenv.config();
 
 const router = express.Router();
 
@@ -27,11 +27,13 @@ Answer: ...
 `;
 
   if (provider === 'gemini') {
-    const genAI = new GoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY });
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+
     const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro" });
 
     const result = await model.generateContent(prompt);
-    const response = await result.response;
+    const response = result.response;
     return response.text();
 
   } else if (provider === 'openai') {
