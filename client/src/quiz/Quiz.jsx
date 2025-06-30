@@ -17,21 +17,43 @@ const Quiz = () => {
     if (name === 'file') {
       setForm((prev) => ({ ...prev, file: files[0] }));
     } else {
-      setForm((prev) => ({ ...prev, [name]: value }));
+      setForm((prev) => ({ ...prev, [name]: value }));// this preserves the previous state and updates only the new state. if i do onchange=(e)=>setForm(e.target.value} it wont retain the original form like the previous state. 
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log('🧾 Submitted Form:', form);
-    // TODO: Send to backend
-  };
+    const { topic, level, grade, questions, time, keywords, file } = form;
+    try {
+
+      const res = await fetch('/api/gpt/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ topic, level, grade, questions, time, keywords, file }),
+      });
+      if(res.ok){
+        const data = await res.json();
+        console.log('🎯 Quiz generated successfully:', data);
+      }
+      else{
+        console.error('❌ Error generating quiz:', res.statusText);
+      }
+    }
+
+    catch (error) {
+        console.error('Error:', error);
+      };
+    }
+
 
   return (
     <div className="quiz-container">
       <div className="quiz-card">
         <h1 className="quiz-title">🎯 Customize Your Quiz</h1>
-  
+
         <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-8">
           {/* Left Column */}
           <div className="space-y-6">
@@ -46,7 +68,7 @@ const Quiz = () => {
                 required
               />
             </div>
-  
+
             <div>
               <label className="label">Difficulty Level</label>
               <select
@@ -60,7 +82,7 @@ const Quiz = () => {
                 <option value="hard">Hard</option>
               </select>
             </div>
-  
+
             <div>
               <label className="label">Education Level</label>
               <select
@@ -74,7 +96,7 @@ const Quiz = () => {
                 <option value="phd">PhD</option>
               </select>
             </div>
-  
+
             <div className="flex gap-4">
               <div className="flex-1">
                 <label className="label">Questions</label>
@@ -102,7 +124,7 @@ const Quiz = () => {
               </div>
             </div>
           </div>
-  
+
           {/* Right Column */}
           <div className="space-y-6">
             <div>
@@ -116,7 +138,7 @@ const Quiz = () => {
                 placeholder="Write a sentence or paragraph about what you'd like the quiz to focus on..."
               />
             </div>
-  
+
             <div>
               <label className="label">Attach PDF / DOCX / TXT (Optional)</label>
               <input
@@ -128,7 +150,7 @@ const Quiz = () => {
               />
             </div>
           </div>
-  
+
           {/* Submit */}
           <div className="md:col-span-2">
             <button type="submit" className="submit-btn">
@@ -138,7 +160,8 @@ const Quiz = () => {
         </form>
       </div>
     </div>
-  )};
-  
+  )
+};
+
 
 export default Quiz;
