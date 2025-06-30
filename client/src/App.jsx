@@ -9,7 +9,7 @@ import UserProfile from './profile/Profile';
 import Analytics from './analytics/Analytics';
 import History from './History/history';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Display_quiz from './quiz/Display_quiz';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -45,6 +45,7 @@ function App() {
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/history" element={<History />} />
+            <Route path="/display_quiz" element={<Display_quiz />} />
             <Route path="*" element={<Navigate to="/home" />} />
           </Routes>
         </div>

@@ -1,0 +1,48 @@
+.quizbox-container {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 75vw;
+    margin: 30px auto;
+    background-color: blueviolet;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+  
+  .quizbox-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .quizbox-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .quizbox-option {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: skyblue;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .quizbox-option:hover {
+    background-color: darkblue;
+    border-color: #88f;
+  }
+  
+  .quizbox-option.selected {
+    background-color: #d0ebff;
+    border-color: #3399ff;
+    font-weight: bold;
+  }
+  
+  .quizbox-result {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #444;
+  }

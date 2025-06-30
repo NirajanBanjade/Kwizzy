@@ -8,6 +8,7 @@ import pool from '../database/db.js';
 import authRoutes from './routes/login.js';
 import quizRoutes from './routes/quiz.js';
 import userRoutes from './routes/user.js';
+import gptRoutes from './routes/gpt.js'; // ✅ ADD THIS
 import cors from 'cors';
 app.use(cors());
 
@@ -25,7 +26,7 @@ pool.query('SELECT NOW()')
 app.use('/api/auth', authRoutes);//All routes inside authRoutes will be prefixed with /api/auth
 app.use('/api/user', quizRoutes);//All routes inside quizRoutes will be prefixed with /api/user
 app.use('/api/user', userRoutes);//All routes inside userRoutes will be prefixed with /api/user
-  
+app.use('/api/gpt', gptRoutes); // ✅ ADD THIS
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

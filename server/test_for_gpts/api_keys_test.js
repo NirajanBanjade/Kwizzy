@@ -15,7 +15,7 @@ Difficulty: ${difficulty}
 Number of questions: ${questions}
 Context: ${context || 'N/A'}
 
-Generate multiple-choice questions in this format:
+Generate exactly ${questions} multiple-choice questions in this format:
 Q: ...
 A. ...
 B. ...
@@ -29,7 +29,7 @@ if (provider === 'gemini') {
     const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro" });
   
     const result = await model.generateContent(prompt);
-    const response = await result.response;
+    const response = result.response;
     return response.text();
   }
    else if (provider === 'openai') {
