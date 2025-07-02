@@ -3,7 +3,8 @@ import OpenAI from "openai";
 
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: '../../.env' });
+
 const geminiKey = process.env.GEMINI_API_KEY;
 
 export const QuizGenerator = {
@@ -26,7 +27,7 @@ Answer: ...
 
 if (provider === 'gemini') {
     const genAI = new GoogleGenerativeAI(geminiKey);
-    const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-flash" });
   
     const result = await model.generateContent(prompt);
     const response = result.response;
