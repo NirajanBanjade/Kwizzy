@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './Quizbox.css';
 
-const Quizbox = ({ question, options }) => {
-  const [selected, setSelected] = useState(null);
+const Quizbox = ({ question, options, correct_answer }) => {
+  const [selectedIdx, setSelectedIdx] = useState(null);
 
-  const handleSelect = (option) => {
-    setSelected(option);
+  const handleSelect = (idx) => {
+    setSelectedIdx(idx);
   };
 
   return (
@@ -14,17 +14,31 @@ const Quizbox = ({ question, options }) => {
         <h2>{question}</h2>
       </div>
       <div className="quizbox-options">
-        {options.map((opt, idx) => (
-          <button
-            key={idx}
-            className={`quizbox-option ${selected === opt ? 'selected' : ''}`}
-            onClick={() => handleSelect(opt)}
-          >
-            {opt}
-          </button>
-        ))}
+        {options.map((opt, idx) => {
+          let className = 'quizbox-option';
+          if (selectedIdx !== null) {
+            if (idx === correct_answer) className += ' correct';
+            else if (idx === selectedIdx) className += ' wrong';
+          }
+
+          return (
+            <button
+              key={idx}
+              className={className}
+              onClick={() => handleSelect(idx)}
+              disabled={selectedIdx !== null}
+            >
+              {opt}
+            </button>
+          );
+        })}
       </div>
-      {selected && <p className="quizbox-result">You selected: {selected}</p>}
+      {selectedIdx !== null && (
+        <p className="quizbox-result">
+          You selected: {options[selectedIdx]}<br />
+          {selectedIdx === correct_answer ? '✅ Correct!' : `❌ Wrong. Correct: ${options[correct_answer]}`}
+        </p>
+      )}
     </div>
   );
 };
