@@ -5,7 +5,7 @@ import { authenticateToken } from '../middleware/auth.js';
 
 router.get('/profile', authenticateToken, async (req, res) => {
     try{
-        const user_id = await pool.query('SELECT id, name, email FROM users WHERE id = $1', [req.user.id]);
+        const user_id = await pool.query('SELECT id, name, email, created_at FROM users WHERE id = $1', [req.user.id]);
         res.json(user_id.rows[0]);
     }
     catch(error){
