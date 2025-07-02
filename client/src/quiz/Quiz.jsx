@@ -31,12 +31,15 @@ const Quiz = () => {
     console.log('🧾 Submitted Form:', form);
 
     try {
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
       const { topic, level, grade, questions, time, keywords, file, provider } = form;
 
       const res = await fetch(`${baseURL}/gpt/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           topic,
@@ -50,6 +53,7 @@ const Quiz = () => {
       if(res.ok){
         const data = await res.json();
         console.log('🎯 Quiz generated successfully:', data);
+
         navigate('/display_quiz', { state: { quizData: data.quizJson } }); // ✅
       }
       else{
