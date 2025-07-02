@@ -3,7 +3,8 @@ import OpenAI from "openai";
 
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: '../../.env' });
+
 const geminiKey = process.env.GEMINI_API_KEY;
 
 export const QuizGenerator = {
@@ -15,7 +16,7 @@ Difficulty: ${difficulty}
 Number of questions: ${questions}
 Context: ${context || 'N/A'}
 
-Generate multiple-choice questions in this format:
+Generate exactly ${questions} multiple-choice questions in this format:
 Q: ...
 A. ...
 B. ...
@@ -26,10 +27,10 @@ Answer: ...
 
 if (provider === 'gemini') {
     const genAI = new GoogleGenerativeAI(geminiKey);
-    const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-flash" });
   
     const result = await model.generateContent(prompt);
-    const response = await result.response;
+    const response = result.response;
     return response.text();
   }
    else if (provider === 'openai') {

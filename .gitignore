@@ -1,3 +1,5 @@
 .env
 .env.localbackup
 node_modules/
+
+server/test_for_gpts/test_case.js

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Quiz.css';
 
+import { useNavigate } from 'react-router-dom';
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 const Quiz = () => {
   const [form, setForm] = useState({
     topic: '',
@@ -11,6 +13,9 @@ const Quiz = () => {
     keywords: '',
     file: null,
   });
+   
+  const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -24,19 +29,32 @@ const Quiz = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     console.log('🧾 Submitted Form:', form);
-    const { topic, level, grade, questions, time, keywords, file } = form;
-    try {
 
-      const res = await fetch('/api/gpt/generate', {
+    try {
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
+      const { topic, level, grade, questions, time, keywords, file, provider } = form;
+
+      const res = await fetch(`${baseURL}/gpt/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ topic, level, grade, questions, time, keywords, file }),
+        body: JSON.stringify({
+          topic,
+          context: keywords, // ✅ backend expects this as `context`
+          difficulty: level, // ✅ backend expects this as `difficulty`
+          questions,
+          provider: 'gemini',          // ✅ required
+        }),
       });
+      
       if(res.ok){
         const data = await res.json();
         console.log('🎯 Quiz generated successfully:', data);
+
+        navigate('/display_quiz', { state: { quizData: data.quizJson } }); // ✅
       }
       else{
         console.error('❌ Error generating quiz:', res.statusText);
