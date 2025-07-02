@@ -3,7 +3,8 @@ import express from 'express';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import OpenAI from 'openai';
 import dotenv from 'dotenv';
-dotenv.config({ path: '../.env' }); 
+dotenv.config({ path: '../../.env' });
+
 
 
 const router = express.Router();
@@ -30,7 +31,7 @@ Answer: ...
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 
-    const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "models/gemini-1.5-flash" });
 
     const result = await model.generateContent(prompt);
     const response = result.response;
