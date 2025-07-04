@@ -2,8 +2,8 @@
 
 
 .profile-container {
-  max-width: 60vw;
-  max-height: 60vh;
+  width: 50vw;
+  height: 60vh;
   margin: 80px auto;
   padding: 40px;
   background-color: #234f8dcc;
