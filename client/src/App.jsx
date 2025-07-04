@@ -10,6 +10,7 @@ import Analytics from './analytics/Analytics';
 import History from './History/history';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Display_quiz from './quiz/Display_quiz';
+import Quiz_details from './quiz_details/quiz_details';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -47,6 +48,7 @@ function App() {
             <Route path="/history" element={<History />} />
             <Route path="/display_quiz" element={<Display_quiz />} />
             <Route path="*" element={<Navigate to="/home" />} />
+            <Route path="/quiz/:quizId" element={ <Quiz_details />} />
           </Routes>
         </div>
       </div>

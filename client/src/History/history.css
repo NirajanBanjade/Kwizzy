@@ -1,0 +1,14 @@
+.history-container {
+    display: flex;
+    gap: 20px;
+    padding: 1rem;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .question-list {
+    margin-top: 10px;
+    padding-left: 20px;
+    list-style-type: disc;
+  }
+  
