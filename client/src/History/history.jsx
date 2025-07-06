@@ -37,6 +37,7 @@ const History = () => {
   
 
   return (
+    
     <div className='history-container'>
       {quizzes.map((quiz) => (
         <div key={quiz.id} onClick={() => handleQuizClick(quiz.id)}>

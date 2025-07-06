@@ -25,8 +25,20 @@ function App() {
   };
 
   const handleLogout = () => {
+    // Clear localStorage
     localStorage.removeItem('username');
     localStorage.removeItem('token');
+    localStorage.removeItem('email'); // if you store email
+    
+    // Clear sessionStorage (if you use it)
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('email');
+    
+    // Clear all localStorage at once (alternative approach)
+    localStorage.clear();
+    
+    // Update state
     setIsLoggedIn(false);
   };
 
@@ -44,7 +56,6 @@ function App() {
             <Route path="/" element={<Home_page />} />
             <Route path="/quiz" element={<Quiz />} />
             <Route path="/userprofile" element={<UserProfile />} />
-            <Route path="/analytics" element={<Analytics />} />
             <Route path="/history" element={<History />} />
             <Route path="/display_quiz" element={<Display_quiz />} />
             <Route path="*" element={<Navigate to="/home" />} />

@@ -47,17 +47,21 @@
   color: #2d3436;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .profile-container {
     padding: 30px 20px;
     margin: 40px 20px;
+    width: 80vw;
+    height: 50vh;
   }
 
   .profile-container h1 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .profile-container p {
     font-size: 1.2rem;
   }
+  
 }
+
