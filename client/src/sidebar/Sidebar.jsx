@@ -70,7 +70,6 @@ const Sidebar = () => {
           <li onClick={() => handleNavigation('/')}><FaHome /><span>Home</span></li>
           <li onClick={() => handleNavigation('/userprofile')}><FaUser /><span>{user}'s Profile</span></li>
           <li onClick={() => handleNavigation('/quiz')}><FaPlay /><span>Start Quiz</span></li>
-          <li onClick={() => handleNavigation('/analytics')}><FaChartBar /><span>Analytics</span></li>
           <li onClick={() => handleNavigation('/history')}><FaHistory /><span>History</span></li>
 
 

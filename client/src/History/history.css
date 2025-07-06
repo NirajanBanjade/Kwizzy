@@ -1,9 +1,26 @@
+/* history.css */
+
 .history-container {
     display: flex;
-    gap: 20px;
+    flex-wrap: wrap;           /* allow wrapping to new lines */
+    justify-content: center;   /* center items in each row */
+    gap: 2rem;                 /* spacing between boxes */
     padding: 1rem;
-    width: 100vw;
-    height: 100vh;
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  
+  .history-container > div {
+    flex: 1 1 calc(25% - 2rem);  /* 4 per row with gap */
+    max-width: calc(25% - 2rem); /* ensure 4 per row */
+    box-sizing: border-box;
+  }
+  
+  
+  /* Ensure word wrapping and box fit */
+  .history-container * {
+    box-sizing: border-box;
+    word-wrap: break-word;
   }
   
   .question-list {
@@ -11,4 +28,19 @@
     padding-left: 20px;
     list-style-type: disc;
   }
+  
+  @media (max-width: 1024px) {
+    .history-container > div {
+      flex: 1 1 calc(50% - 2rem);  /* 2 per row */
+      max-width: calc(50% - 2rem);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .history-container > div {
+      flex: 1 1 100%;  /* 1 per row */
+      max-width: 100%;
+    }
+  }
+  
   
