@@ -47,6 +47,7 @@ const History = () => {
           date={new Date(quiz.created_at).toLocaleDateString()} // ✅ Correct prop
           timeTaken={quiz.time_taken || '10 min'}
           onClick={() => handleQuizClick(quiz.id)}
+          className="history-comp"
         />
 
 

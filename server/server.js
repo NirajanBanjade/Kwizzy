@@ -2,7 +2,8 @@ import express from 'express';
 const app = express();
 
 import dotenv from 'dotenv';
-dotenv.config({ path: '../.env' });
+// dotenv.config({ path: '../.env' });
+dotenv.config();
 const PORT = process.env.PORT;
 import pool from '../database/db.js';
 import authRoutes from './routes/login.js';
