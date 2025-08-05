@@ -1,6 +1,10 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
-dotenv.config({ path: '../.env' }); // adjust based on actual location
+// dotenv.config({ path: '../.env' }); // adjust based on actual location
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: '../.env' });
+}
+
 
 //establishing database connection
 const pool = new Pool({

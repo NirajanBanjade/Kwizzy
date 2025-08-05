@@ -1,46 +1,57 @@
-/* history.css */
-
+/* Container for all history cards */
 .history-container {
-    display: flex;
-    flex-wrap: wrap;           /* allow wrapping to new lines */
-    justify-content: center;   /* center items in each row */
-    gap: 2rem;                 /* spacing between boxes */
-    padding: 1rem;
-    box-sizing: border-box;
-    max-width: 100%;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* align cards from left */
+  gap: 1.5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Individual card wrapper */
+.history-container > div {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1rem;
+  flex: 1 1 250px;       /* each card will try to be at least 250px wide */
+  max-width: 300px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+/* Optional: Hover effect */
+.history-container > div:hover {
+  transform: scale(1.02);
+}
+
+/* Typography inside card */
+.history-container h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.history-container p {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+}
+
+/* Ensure words don’t overflow */
+.history-container * {
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+/* Responsive: 2 cards per row on medium screens */
+@media (max-width: 1024px) {
   .history-container > div {
-    flex: 1 1 calc(25% - 2rem);  /* 4 per row with gap */
-    max-width: calc(25% - 2rem); /* ensure 4 per row */
-    box-sizing: border-box;
+    flex: 1 1 45%;
   }
-  
-  
-  /* Ensure word wrapping and box fit */
-  .history-container * {
-    box-sizing: border-box;
-    word-wrap: break-word;
+}
+
+/* Responsive: 1 card per row on small screens */
+@media (max-width: 600px) {
+  .history-container > div {
+    flex: 1 1 100%;
   }
-  
-  .question-list {
-    margin-top: 10px;
-    padding-left: 20px;
-    list-style-type: disc;
-  }
-  
-  @media (max-width: 1024px) {
-    .history-container > div {
-      flex: 1 1 calc(50% - 2rem);  /* 2 per row */
-      max-width: calc(50% - 2rem);
-    }
-  }
-  
-  @media (max-width: 600px) {
-    .history-container > div {
-      flex: 1 1 100%;  /* 1 per row */
-      max-width: 100%;
-    }
-  }
-  
-  
+}
