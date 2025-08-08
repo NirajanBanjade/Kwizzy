@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import pool from '../../database/db.js';
+import pool from '../database/db.js';
 import { authenticateToken } from '../middleware/auth.js';
 
 router.get('/profile', authenticateToken, async (req, res) => {

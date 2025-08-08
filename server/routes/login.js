@@ -1,6 +1,6 @@
 // login.js
 import express from 'express';
-import pool from '../../database/db.js';
+import pool from '../database/db.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 const router = express.Router();

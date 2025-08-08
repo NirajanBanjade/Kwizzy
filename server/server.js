@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 // dotenv.config({ path: '../.env' });
 dotenv.config();
 const PORT = process.env.PORT;
-import pool from '../database/db.js';
+import pool from './database/db.js';
 import authRoutes from './routes/login.js';
 import quizRoutes from './routes/quiz.js';
 import userRoutes from './routes/user.js';

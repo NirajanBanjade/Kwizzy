@@ -1,59 +1,39 @@
-version: '3.8'  # ✅ Still valid, though no longer required as of newer Compose versions
-
 services:
-  server:
-    build:
-      context: .                     # ✅ Use full root so COPY .. works
-      dockerfile: server/Dockerfile # ✅ Use Dockerfile inside server/
-    ports:
-      - "5001:5001"  # ✅ Your Express server listens on 5001
-    env_file:
-      - .env  # ✅ Assumes .env is in the root and server uses it via: dotenv.config({ path: '../.env' })
-    depends_on:
-      - mongo
-      - postgres
-    # ⚠️ Optional: Only needed if you want local server changes reflected in container (e.g., for dev/hot reload)
-    # In production, this overrides the image code so best to comment/remove
-    # volumes:
-    #   - ./server:/app
-    working_dir: /app
-    command: ["node", "server/server.js"]
-    restart: always
-    environment:
-      - NODE_ENV=production
-
-  client:
-    build: ./client
-    ports:
-      - "3000:80"  # ✅ Assumes you’re serving a built React app using nginx or similar inside Dockerfile
-    env_file:
-      - ./client/.env
-    depends_on:
-      - server
-    # ⚠️ Same as server: remove for production unless you're developing client
-    # volumes:
-    #   - ./client:/app
-    working_dir: /app
-    restart: always
-
-  mongo:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-
   postgres:
-    image: postgres:14
+    image: postgres:16
     environment:
-      POSTGRES_USER: nirajanbanjade
-      POSTGRES_PASSWORD: kwizy123 
-      POSTGRES_DB: kwizy_db
+      POSTGRES_DB: kwizy
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d kwizy"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  server:
+    build:
+      context: ./server
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # This pulls vars from the root .env (same level as this compose file)
+    env_file:
+      - ./.env
+    ports:
+      - "5001:5000"
+
+  client:
+    build:
+      context: ./client
+    depends_on:
+      - server
+    ports:
+      - "3001:80"
 
 volumes:
-  mongo_data:
   pgdata:

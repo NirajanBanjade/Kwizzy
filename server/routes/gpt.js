@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import OpenAI from 'openai';
 import dotenv from 'dotenv';
 dotenv.config({ path: '../../.env' });
-import pool from '../../database/db.js';
+import pool from '../database/db.js';
 import { authenticateToken } from '../middleware/auth.js';
 
 
